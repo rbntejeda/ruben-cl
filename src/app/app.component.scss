@@ -277,16 +277,16 @@ mat-card-subtitle {
 
 .contact-icon {
   align-items: center;
-  background: rgb(255 255 255 / 18%);
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 999px;
+  background: transparent;
+  border: 0;
   display: inline-flex;
   font-size: 0.9rem;
   font-weight: 900;
-  height: 1.75rem;
+  height: 1.2rem;
   justify-content: center;
   line-height: 1;
-  min-width: 1.75rem;
+  min-width: 1.2rem;
+  opacity: 0.9;
 }
 
 .brand-icon {
@@ -355,8 +355,6 @@ mat-card-subtitle {
 }
 
 :host(.light-theme) .contact-icon {
-  background: rgb(37 99 235 / 9%);
-  border-color: rgb(37 99 235 / 16%);
   color: #1e3a8a;
 }
 
