@@ -1,22 +1,40 @@
-<header class="site-header">
-  <a class="brand" href="#inicio" aria-label="Ir al inicio">
+<mat-toolbar class="site-header">
+  <a class="brand" href="#inicio" aria-label="Ir al inicio" (click)="closeMenu()">
     <span class="brand-mark">RT</span>
     <span>Ruben E. Tejeda R.</span>
   </a>
 
-  <nav aria-label="Navegación principal">
-    <a href="#perfil">Perfil</a>
-    <a href="#stack">Stack</a>
-    <a href="#experiencia">Experiencia</a>
-    <a href="#formacion">Formación</a>
-    <a href="#hobbies">Hobbies</a>
-    <a class="nav-cta" href="#contacto">Contacto</a>
+  <span class="toolbar-spacer"></span>
+
+  <nav class="desktop-nav" aria-label="Navegación principal">
+    <a mat-button href="#perfil">Perfil</a>
+    <a mat-button href="#stack">Stack</a>
+    <a mat-button href="#experiencia">Experiencia</a>
+    <a mat-button href="#formacion">Formación</a>
+    <a mat-button href="#hobbies">Hobbies</a>
+    <a mat-stroked-button class="nav-cta" href="#contacto">Contacto</a>
   </nav>
 
-  <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-pressed]="isLightTheme">
-    {{ isLightTheme ? 'Modo noche' : 'Modo día' }}
+  <mat-slide-toggle class="theme-toggle desktop-theme" [checked]="isLightTheme" (change)="toggleTheme()">
+    {{ isLightTheme ? 'Día' : 'Noche' }}
+  </mat-slide-toggle>
+
+  <button mat-stroked-button class="mobile-menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen">
+    {{ isMenuOpen ? 'Cerrar' : 'Menú' }}
   </button>
-</header>
+</mat-toolbar>
+
+<nav class="mobile-nav" *ngIf="isMenuOpen" aria-label="Navegación móvil">
+  <a mat-button href="#perfil" (click)="closeMenu()">Perfil</a>
+  <a mat-button href="#stack" (click)="closeMenu()">Stack</a>
+  <a mat-button href="#experiencia" (click)="closeMenu()">Experiencia</a>
+  <a mat-button href="#formacion" (click)="closeMenu()">Formación</a>
+  <a mat-button href="#hobbies" (click)="closeMenu()">Hobbies</a>
+  <a mat-stroked-button href="#contacto" (click)="closeMenu()">Contacto</a>
+  <mat-slide-toggle [checked]="isLightTheme" (change)="toggleTheme()">
+    {{ isLightTheme ? 'Modo día' : 'Modo noche' }}
+  </mat-slide-toggle>
+</nav>
 
 <main id="inicio">
   <section class="hero section-grid">
@@ -28,15 +46,16 @@
         de experiencia en TI, Angular, AWS, Azure, Terraform, automatización DevOps e integraciones cloud.
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="mailto:{{ contact.email }}">Hablemos</a>
-        <a class="button secondary" href="#experiencia">Ver trayectoria</a>
+        <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">Hablemos</a>
+        <a mat-stroked-button class="button secondary" href="#experiencia">Ver trayectoria</a>
       </div>
     </div>
 
-    <aside class="profile-card" aria-label="Resumen profesional">
+    <mat-card class="profile-card" aria-label="Resumen profesional">
       <div class="avatar" aria-hidden="true">RT</div>
-      <h2>Ruben Eduardo Tejeda Roa</h2>
-      <p>Ingeniero de Ejecución en Computación e Informática</p>
+      <mat-card-title>Ruben Eduardo Tejeda Roa</mat-card-title>
+      <mat-card-subtitle>Ingeniero de Ejecución en Computación e Informática</mat-card-subtitle>
+      <mat-divider></mat-divider>
       <dl>
         <div>
           <dt>Experiencia</dt>
@@ -51,7 +70,7 @@
           <dd>Inglés técnico avanzado</dd>
         </div>
       </dl>
-    </aside>
+    </mat-card>
   </section>
 
   <section id="perfil" class="section">
@@ -59,16 +78,16 @@
       <p class="eyebrow">Perfil</p>
       <h2>Un perfil técnico con mirada de producto y operación.</h2>
     </div>
-    <div class="content-card split">
+    <mat-card class="content-card split">
       <p>
         He trabajado en proyectos web, backend, cloud, realidad virtual/aumentada y procesos de alta
         concurrencia. Me muevo bien entre estrategia técnica, ejecución, integración, despliegue y mejora
         continua, buscando que los equipos entreguen con mayor seguridad y menos fricción.
       </p>
-      <div class="skill-cloud" aria-label="Competencias">
-        <span *ngFor="let skill of skills">{{ skill }}</span>
-      </div>
-    </div>
+      <mat-chip-set class="skill-cloud" aria-label="Competencias">
+        <mat-chip *ngFor="let skill of skills">{{ skill }}</mat-chip>
+      </mat-chip-set>
+    </mat-card>
   </section>
 
   <section id="stack" class="section">
@@ -82,12 +101,12 @@
     </div>
 
     <div class="tech-grid">
-      <article class="tech-card" *ngFor="let category of techCategories">
-        <h3>{{ category.title }}</h3>
-        <div class="tech-tags">
-          <span *ngFor="let item of category.items">{{ item }}</span>
-        </div>
-      </article>
+      <mat-card class="tech-card" *ngFor="let category of techCategories">
+        <mat-card-title>{{ category.title }}</mat-card-title>
+        <mat-chip-set class="tech-tags" aria-label="Tecnologías de {{ category.title }}">
+          <mat-chip *ngFor="let item of category.items">{{ item }}</mat-chip>
+        </mat-chip-set>
+      </mat-card>
     </div>
   </section>
 
@@ -100,13 +119,13 @@
     <div class="timeline">
       <article class="timeline-item" *ngFor="let item of experiences">
         <div class="timeline-date">{{ item.period }}</div>
-        <div class="timeline-card">
-          <h3>{{ item.role }}</h3>
-          <p class="company">{{ item.company }}</p>
+        <mat-card class="timeline-card">
+          <mat-card-title>{{ item.role }}</mat-card-title>
+          <mat-card-subtitle class="company">{{ item.company }}</mat-card-subtitle>
           <ul>
             <li *ngFor="let highlight of item.highlights">{{ highlight }}</li>
           </ul>
-        </div>
+        </mat-card>
       </article>
     </div>
   </section>
@@ -118,11 +137,11 @@
     </div>
 
     <div class="cards-grid">
-      <article class="study-card" *ngFor="let study of studies">
+      <mat-card class="study-card" *ngFor="let study of studies">
         <span>{{ study.year }}</span>
-        <h3>{{ study.title }}</h3>
+        <mat-card-title>{{ study.title }}</mat-card-title>
         <p>{{ study.institution }}</p>
-      </article>
+      </mat-card>
     </div>
   </section>
 
@@ -131,14 +150,14 @@
       <p class="eyebrow">Hobbies e intereses</p>
       <h2>Lo que también mueve mi curiosidad.</h2>
     </div>
-    <div class="content-card">
+    <mat-card class="content-card">
       <ul class="hobby-list">
         <li *ngFor="let hobby of hobbies">{{ hobby }}</li>
       </ul>
       <p class="note">
         Esta sección está pensada para crecer con proyectos personales, experimentos, artículos o demos.
       </p>
-    </div>
+    </mat-card>
   </section>
 
   <section id="contacto" class="contact-section">
@@ -148,8 +167,8 @@
       Disponible para desarrollo fullstack, asesoría cloud, automatización DevOps y liderazgo técnico.
     </p>
     <div class="contact-actions">
-      <a class="button primary" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-      <a class="button secondary" href="tel:+56991223304">{{ contact.phone }}</a>
+      <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+      <a mat-stroked-button class="button secondary" href="tel:+56991223304">{{ contact.phone }}</a>
     </div>
   </section>
 </main>

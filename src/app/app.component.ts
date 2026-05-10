@@ -1,5 +1,11 @@
 import { Component, HostBinding } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 type Experience = {
   period: string;
@@ -22,13 +28,15 @@ type TechCategory = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf, MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatSlideToggleModule, MatToolbarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   @HostBinding('class.light-theme')
   protected isLightTheme = false;
+
+  protected isMenuOpen = false;
 
   protected readonly contact = {
     email: 'rubentejedaroa@gmail.com',
@@ -101,6 +109,14 @@ export class AppComponent {
 
   protected toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
+  }
+
+  protected toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  protected closeMenu(): void {
+    this.isMenuOpen = false;
   }
 
   protected readonly experiences: Experience[] = [

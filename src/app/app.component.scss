@@ -8,13 +8,24 @@
   background: rgb(11 18 32 / 78%);
   border-bottom: 1px solid rgb(255 255 255 / 8%);
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
+  min-height: 76px;
   left: 0;
   padding: 1rem clamp(1rem, 4vw, 4rem);
   position: sticky;
   right: 0;
   top: 0;
   z-index: 10;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.mobile-menu-button,
+.mobile-nav {
+  display: none;
 }
 
 :host(.light-theme) .site-header {
@@ -41,6 +52,7 @@ nav {
 :host(.light-theme) h1,
 :host(.light-theme) h2,
 :host(.light-theme) h3,
+:host(.light-theme) mat-card-title,
 :host(.light-theme) dd,
 :host(.light-theme) .hobby-list {
   color: #0f172a;
@@ -78,6 +90,11 @@ nav a:hover {
   transform: translateY(-1px);
 }
 
+.desktop-nav a,
+.mobile-nav a {
+  border-radius: 999px;
+}
+
 .nav-cta {
   border: 1px solid rgb(139 233 253 / 40%);
   border-radius: 999px;
@@ -95,6 +112,18 @@ nav a:hover {
   font-weight: 800;
   padding: 0.55rem 0.9rem;
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle.mat-mdc-slide-toggle {
+  padding: 0.35rem 0.65rem;
+}
+
+.theme-toggle,
+.mobile-nav mat-slide-toggle {
+  --mdc-switch-selected-track-color: #8be9fd;
+  --mdc-switch-selected-handle-color: #0f172a;
+  --mdc-switch-unselected-track-color: rgb(148 163 184 / 45%);
+  --mdc-switch-unselected-handle-color: #cbd5e1;
 }
 
 .theme-toggle:hover {
@@ -185,6 +214,18 @@ h3 {
   margin-bottom: 0.35rem;
 }
 
+mat-card-title {
+  color: #f8fafc;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+mat-card-subtitle {
+  color: #cbd5e1;
+}
+
 .lead,
 .section-intro,
 .content-card p,
@@ -245,6 +286,15 @@ h3 {
   box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
 }
 
+.mat-mdc-card.profile-card,
+.mat-mdc-card.content-card,
+.mat-mdc-card.timeline-card,
+.mat-mdc-card.study-card,
+.mat-mdc-card.tech-card {
+  --mdc-elevated-card-container-color: transparent;
+  color: inherit;
+}
+
 :host(.light-theme) .profile-card,
 :host(.light-theme) .content-card,
 :host(.light-theme) .timeline-card,
@@ -264,6 +314,7 @@ h3 {
 :host(.light-theme) .timeline-card li,
 :host(.light-theme) .note,
 :host(.light-theme) dt,
+:host(.light-theme) mat-card-subtitle,
 :host(.light-theme) footer {
   color: #475569;
 }
@@ -334,6 +385,13 @@ dd {
   border-radius: 999px;
   color: #dff9ff;
   padding: 0.55rem 0.8rem;
+}
+
+.skill-cloud mat-chip,
+.tech-tags mat-chip {
+  --mdc-chip-elevated-container-color: rgb(139 233 253 / 10%);
+  --mdc-chip-label-text-color: #dff9ff;
+  --mdc-chip-outline-color: rgb(139 233 253 / 18%);
 }
 
 .timeline {
@@ -410,11 +468,20 @@ dd {
   padding: 0.45rem 0.65rem;
 }
 
+.tech-tags mat-chip {
+  --mdc-chip-elevated-container-color: rgb(15 23 42 / 70%);
+  --mdc-chip-label-text-color: #dbeafe;
+}
+
 :host(.light-theme) .skill-cloud span,
-:host(.light-theme) .tech-tags span {
+:host(.light-theme) .tech-tags span,
+:host(.light-theme) .skill-cloud mat-chip,
+:host(.light-theme) .tech-tags mat-chip {
   background: rgb(37 99 235 / 8%);
   border-color: rgb(37 99 235 / 16%);
   color: #1e3a8a;
+  --mdc-chip-elevated-container-color: rgb(37 99 235 / 8%);
+  --mdc-chip-label-text-color: #1e3a8a;
 }
 
 .hobbies-section {
@@ -442,18 +509,47 @@ footer {
 }
 
 @media (max-width: 860px) {
-  .site-header,
-  nav {
-    align-items: flex-start;
-    flex-direction: column;
+  .desktop-nav,
+  .desktop-theme {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    border-color: rgb(139 233 253 / 36%);
+    border-radius: 999px;
+    color: #f8fafc;
+    display: inline-flex;
+  }
+
+  :host(.light-theme) .mobile-menu-button {
+    color: #0f172a;
+  }
+
+  .mobile-nav {
+    align-items: stretch;
+    animation: menu-drop 180ms ease-out;
+    backdrop-filter: blur(18px);
+    background: rgb(11 18 32 / 92%);
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+  }
+
+  :host(.light-theme) .mobile-nav {
+    background: rgb(248 250 252 / 94%);
+    border-bottom-color: rgb(15 23 42 / 10%);
+  }
+
+  .mobile-nav a {
+    justify-content: flex-start;
   }
 
   .site-header {
-    position: static;
-  }
-
-  nav {
-    gap: 0.7rem;
+    position: sticky;
   }
 
   .section-grid,
@@ -470,6 +566,18 @@ footer {
 
   .timeline-date {
     padding-top: 0;
+  }
+}
+
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
