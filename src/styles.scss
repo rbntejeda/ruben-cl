@@ -18,6 +18,25 @@
   scroll-behavior: smooth;
 }
 
+button,
+input,
+textarea,
+select,
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-card,
+.mat-mdc-card-title,
+.mat-mdc-card-subtitle,
+.mat-mdc-chip,
+.mat-mdc-slide-toggle,
+.mat-mdc-slide-toggle .mdc-label,
+.mdc-button,
+.mdc-evolution-chip__text-label {
+  font-family: inherit;
+}
+
 * {
   box-sizing: border-box;
 }
