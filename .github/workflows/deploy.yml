@@ -1,8 +1,9 @@
 name: Build and deploy ruben.cl
 
 on:
-  push:
-    branches: [main]
+  # Deploy automático pausado por seguridad mientras se revisa el servidor.
+  # push:
+  #   branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -37,7 +38,7 @@ jobs:
           path: dist/ruben-cl/browser
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
 
@@ -57,7 +58,7 @@ jobs:
 
       - name: Deploy static files
         run: |
-          rsync -az --delete \
+          rsync -az \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT || 22 }}" \
             dist/ \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/ruben-cl/"
