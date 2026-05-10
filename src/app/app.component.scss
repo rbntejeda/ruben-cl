@@ -1,6 +1,11 @@
 :host {
+  color-scheme: dark;
   display: block;
   font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:host(.light-theme) {
+  color-scheme: light;
 }
 
 :host,
@@ -438,9 +443,14 @@ dd {
 
 .skill-cloud mat-chip,
 .tech-tags mat-chip {
-  --mdc-chip-elevated-container-color: rgb(139 233 253 / 10%);
-  --mdc-chip-label-text-color: #dff9ff;
-  --mdc-chip-outline-color: rgb(139 233 253 / 18%);
+  --mat-chip-elevated-container-color: rgb(139 233 253 / 10%);
+  --mat-chip-elevated-selected-container-color: rgb(139 233 253 / 10%);
+  --mat-chip-flat-disabled-selected-container-color: rgb(139 233 253 / 10%);
+  --mat-chip-focus-state-layer-color: #8be9fd;
+  --mat-chip-hover-state-layer-color: #8be9fd;
+  --mat-chip-label-text-color: #dff9ff;
+  --mat-chip-outline-color: rgb(139 233 253 / 18%);
+  --mat-chip-selected-label-text-color: #dff9ff;
 }
 
 .timeline {
@@ -518,8 +528,10 @@ dd {
 }
 
 .tech-tags mat-chip {
-  --mdc-chip-elevated-container-color: rgb(15 23 42 / 70%);
-  --mdc-chip-label-text-color: #dbeafe;
+  --mat-chip-elevated-container-color: rgb(15 23 42 / 70%);
+  --mat-chip-elevated-selected-container-color: rgb(15 23 42 / 70%);
+  --mat-chip-label-text-color: #dbeafe;
+  --mat-chip-selected-label-text-color: #dbeafe;
 }
 
 :host(.light-theme) .skill-cloud span,
@@ -529,8 +541,14 @@ dd {
   background: rgb(37 99 235 / 8%);
   border-color: rgb(37 99 235 / 16%);
   color: #1e3a8a;
-  --mdc-chip-elevated-container-color: rgb(37 99 235 / 8%);
-  --mdc-chip-label-text-color: #1e3a8a;
+  --mat-chip-elevated-container-color: rgb(37 99 235 / 8%);
+  --mat-chip-elevated-selected-container-color: rgb(37 99 235 / 8%);
+  --mat-chip-flat-disabled-selected-container-color: rgb(37 99 235 / 8%);
+  --mat-chip-focus-state-layer-color: #2563eb;
+  --mat-chip-hover-state-layer-color: #2563eb;
+  --mat-chip-label-text-color: #1e3a8a;
+  --mat-chip-outline-color: rgb(37 99 235 / 16%);
+  --mat-chip-selected-label-text-color: #1e3a8a;
 }
 
 .hobbies-section {
