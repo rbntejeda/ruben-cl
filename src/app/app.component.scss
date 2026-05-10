@@ -244,11 +244,17 @@ mat-card-subtitle {
 }
 
 .hero-actions,
-.contact-actions {
+.contact-actions,
+.social-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-top: 2rem;
+}
+
+.social-actions {
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .button {
@@ -497,7 +503,8 @@ dd {
   text-align: center;
 }
 
-.contact-actions {
+.contact-actions,
+.social-actions {
   justify-content: center;
 }
 
