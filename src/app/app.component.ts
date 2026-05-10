@@ -115,6 +115,26 @@ export class AppComponent {
       ]
     },
     {
+      period: '2025',
+      role: 'Especialista Cloud / DevOps',
+      company: 'Universidad de Chile — Proyecto Matemáticas en Ruta',
+      highlights: [
+        'Levantamiento de infraestructura AWS multiaccount con Terraform.',
+        'Diseño de base cloud para separar ambientes, permisos y recursos por cuenta.',
+        'Automatización y documentación técnica para operación y continuidad del proyecto.'
+      ]
+    },
+    {
+      period: '2025',
+      role: 'Desarrollador FullStack e Integraciones',
+      company: 'AGCID',
+      highlights: [
+        'Integración con ClaveÚnica y Ventanilla Única mediante estándares de autenticación e interoperabilidad.',
+        'Desarrollo de módulos de ticketing, gestión documental y certificación medioambiental.',
+        'Construcción de funcionalidades orientadas a trazabilidad, operación interna y atención de solicitudes.'
+      ]
+    },
+    {
       period: '2023 — 2024',
       role: 'Desarrollador FullStack',
       company: 'Innod SPA',
