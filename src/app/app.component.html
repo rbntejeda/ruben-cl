@@ -1,0 +1,134 @@
+<header class="site-header">
+  <a class="brand" href="#inicio" aria-label="Ir al inicio">
+    <span class="brand-mark">RT</span>
+    <span>Ruben Tejeda</span>
+  </a>
+
+  <nav aria-label="Navegación principal">
+    <a href="#perfil">Perfil</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#formacion">Formación</a>
+    <a href="#hobbies">Hobbies</a>
+    <a class="nav-cta" href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero section-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Desarrollador FullStack · DevOps · Cloud</p>
+      <h1>Construyo software confiable, automatizado y listo para crecer.</h1>
+      <p class="lead">
+        Soy Ruben Eduardo Tejeda Roa, ingeniero informático con 9 años de experiencia en TI,
+        desarrollo fullstack, infraestructura cloud, automatización de despliegues y liderazgo técnico.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="mailto:{{ contact.email }}">Hablemos</a>
+        <a class="button secondary" href="#experiencia">Ver trayectoria</a>
+      </div>
+    </div>
+
+    <aside class="profile-card" aria-label="Resumen profesional">
+      <div class="avatar" aria-hidden="true">RT</div>
+      <h2>Ruben Eduardo Tejeda Roa</h2>
+      <p>Ingeniero de Ejecución en Computación e Informática</p>
+      <dl>
+        <div>
+          <dt>Experiencia</dt>
+          <dd>9 años en TI</dd>
+        </div>
+        <div>
+          <dt>Ubicación</dt>
+          <dd>{{ contact.location }}</dd>
+        </div>
+        <div>
+          <dt>Idioma</dt>
+          <dd>Inglés técnico avanzado</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section id="perfil" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Perfil</p>
+      <h2>Un perfil técnico con mirada de producto y operación.</h2>
+    </div>
+    <div class="content-card split">
+      <p>
+        He trabajado en proyectos web, backend, cloud, realidad virtual/aumentada y procesos de alta
+        concurrencia. Me muevo bien entre estrategia técnica, ejecución, integración, despliegue y mejora
+        continua, buscando que los equipos entreguen con mayor seguridad y menos fricción.
+      </p>
+      <div class="skill-cloud" aria-label="Competencias">
+        <span *ngFor="let skill of skills">{{ skill }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Experiencia</p>
+      <h2>Trayectoria profesional</h2>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item" *ngFor="let item of experiences">
+        <div class="timeline-date">{{ item.period }}</div>
+        <div class="timeline-card">
+          <h3>{{ item.role }}</h3>
+          <p class="company">{{ item.company }}</p>
+          <ul>
+            <li *ngFor="let highlight of item.highlights">{{ highlight }}</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="formacion" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Formación</p>
+      <h2>Estudios y perfeccionamiento</h2>
+    </div>
+
+    <div class="cards-grid">
+      <article class="study-card" *ngFor="let study of studies">
+        <span>{{ study.year }}</span>
+        <h3>{{ study.title }}</h3>
+        <p>{{ study.institution }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="hobbies" class="section section-grid hobbies-section">
+    <div class="section-heading">
+      <p class="eyebrow">Hobbies e intereses</p>
+      <h2>Lo que también mueve mi curiosidad.</h2>
+    </div>
+    <div class="content-card">
+      <ul class="hobby-list">
+        <li *ngFor="let hobby of hobbies">{{ hobby }}</li>
+      </ul>
+      <p class="note">
+        Esta sección está pensada para crecer con proyectos personales, experimentos, artículos o demos.
+      </p>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact-section">
+    <p class="eyebrow">Contacto</p>
+    <h2>¿Construimos algo sólido?</h2>
+    <p>
+      Disponible para desarrollo fullstack, asesoría cloud, automatización DevOps y liderazgo técnico.
+    </p>
+    <div class="contact-actions">
+      <a class="button primary" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+      <a class="button secondary" href="tel:+56991223304">{{ contact.phone }}</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Ruben Tejeda. Hecho con Angular y pensado para ruben.cl.</p>
+</footer>
