@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { NgFor } from '@angular/common';
 
 type Experience = {
@@ -27,6 +27,9 @@ type TechCategory = {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  @HostBinding('class.light-theme')
+  protected isLightTheme = false;
+
   protected readonly contact = {
     email: 'rubentejedaroa@gmail.com',
     phone: '+56 9 9122 3304',
@@ -40,6 +43,11 @@ export class AppComponent {
     'AWS',
     'Azure',
     'Terraform',
+    'GitHub Actions',
+    'OpenClaw',
+    'Ollama',
+    'Slack Bot',
+    'Cognito',
     'CI/CD',
     'DevOps',
     'Testing',
@@ -55,7 +63,7 @@ export class AppComponent {
     },
     {
       title: 'Arquitectura y patrones',
-      items: ['SOLID', 'DDD', 'Singleton', 'Factory', 'Repository', 'Decorator', 'Observer', 'Adapter', 'Command Handler']
+      items: ['SOLID', 'DDD', 'Strategy', 'Builder', 'Factory', 'Singleton', 'Repository', 'Decorator', 'Observer', 'Adapter', 'Command Handler']
     },
     {
       title: 'Modelado',
@@ -67,7 +75,7 @@ export class AppComponent {
     },
     {
       title: 'Backend e integración',
-      items: ['.NET Core 3+', 'Entity Framework', 'Kestrel', 'Node.js', 'Express', 'Spring Boot', 'REST', 'SOAP', 'OAuth2', 'JWT', 'SignalR', 'Socket.io', 'MQTT', 'Node-RED', 'Swagger', 'Microservicios', 'Minimal APIs']
+      items: ['.NET Core 3+', 'Entity Framework', 'Kestrel', 'Node.js', 'Express', 'Spring Boot', 'REST', 'SOAP', 'OAuth2', 'OpenID Connect', 'Cognito', 'Google Federation', 'JWT', 'SignalR', 'Socket.io', 'MQTT', 'Node-RED', 'Swagger', 'Microservicios', 'Minimal APIs', 'Slack Bot']
     },
     {
       title: 'Bases de datos',
@@ -79,7 +87,7 @@ export class AppComponent {
     },
     {
       title: 'Cloud y DevOps',
-      items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'CloudFront', 'API Gateway', 'Lambda', 'Docker', 'Kubernetes', 'Container Registry', 'AWS CLI', 'Azure CLI']
+      items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'GitHub Actions', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'Cognito', 'CloudFront', 'API Gateway', 'Lambda', 'Terraform', 'Docker', 'Kubernetes', 'Container Registry', 'AWS CLI', 'Azure CLI']
     },
     {
       title: 'Servidores y servicios',
@@ -87,9 +95,13 @@ export class AppComponent {
     },
     {
       title: 'CMS, IA y ofimática',
-      items: ['WordPress', 'WooCommerce', 'Moodle', 'Wix', 'YOLO v5-v8', 'Excel avanzado', 'Microsoft Project medio', 'Prezi avanzado']
+      items: ['WordPress', 'WooCommerce', 'Moodle', 'Wix', 'OpenClaw', 'Ollama', 'YOLO v5-v8', 'Excel avanzado', 'Microsoft Project medio', 'Prezi avanzado']
     }
   ];
+
+  protected toggleTheme(): void {
+    this.isLightTheme = !this.isLightTheme;
+  }
 
   protected readonly experiences: Experience[] = [
     {
