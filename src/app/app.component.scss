@@ -138,6 +138,7 @@ h3 {
 }
 
 .lead,
+.section-intro,
 .content-card p,
 .contact-section p,
 .profile-card p,
@@ -294,11 +295,38 @@ dd {
   padding-left: 1.2rem;
 }
 
-.cards-grid {
+.cards-grid,
+.tech-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 2rem;
+}
+
+.tech-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tech-card {
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 1.4rem;
+  padding: 1.25rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tech-tags span {
+  background: rgb(15 23 42 / 70%);
+  border: 1px solid rgb(139 233 253 / 14%);
+  border-radius: 999px;
+  color: #dbeafe;
+  font-size: 0.88rem;
+  padding: 0.45rem 0.65rem;
 }
 
 .hobbies-section {
@@ -339,7 +367,8 @@ footer {
   .section-grid,
   .split,
   .timeline-item,
-  .cards-grid {
+  .cards-grid,
+  .tech-grid {
     grid-template-columns: 1fr;
   }
 

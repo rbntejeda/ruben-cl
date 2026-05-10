@@ -6,6 +6,7 @@
 
   <nav aria-label="Navegación principal">
     <a href="#perfil">Perfil</a>
+    <a href="#stack">Stack</a>
     <a href="#experiencia">Experiencia</a>
     <a href="#formacion">Formación</a>
     <a href="#hobbies">Hobbies</a>
@@ -63,6 +64,26 @@
       <div class="skill-cloud" aria-label="Competencias">
         <span *ngFor="let skill of skills">{{ skill }}</span>
       </div>
+    </div>
+  </section>
+
+  <section id="stack" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Stack y competencias</p>
+      <h2>Herramientas para construir, integrar y operar soluciones completas.</h2>
+      <p class="section-intro">
+        Experiencia práctica en frontend, backend, cloud, DevOps, bases de datos, servidores,
+        metodologías de trabajo e integración de sistemas.
+      </p>
+    </div>
+
+    <div class="tech-grid">
+      <article class="tech-card" *ngFor="let category of techCategories">
+        <h3>{{ category.title }}</h3>
+        <div class="tech-tags">
+          <span *ngFor="let item of category.items">{{ item }}</span>
+        </div>
+      </article>
     </div>
   </section>
 

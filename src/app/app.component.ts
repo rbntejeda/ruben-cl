@@ -14,6 +14,11 @@ type Study = {
   institution: string;
 };
 
+type TechCategory = {
+  title: string;
+  items: string[];
+};
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -41,6 +46,49 @@ export class AppComponent {
     'Unity',
     'Realidad virtual/aumentada',
     'Liderazgo técnico'
+  ];
+
+  protected readonly techCategories: TechCategory[] = [
+    {
+      title: 'Métodos de trabajo',
+      items: ['Kanban', 'XP', 'SCRUM', 'Cascada', 'Espiral']
+    },
+    {
+      title: 'Arquitectura y patrones',
+      items: ['SOLID', 'DDD', 'Singleton', 'Factory', 'Repository', 'Decorator', 'Observer', 'Adapter', 'Command Handler']
+    },
+    {
+      title: 'Modelado',
+      items: ['OO', 'Estructurado', 'DFD', 'MER/ER', 'Casos de uso', 'Lucidchart', 'PowerDesigner', 'MySQL Workbench']
+    },
+    {
+      title: 'Frontend',
+      items: ['Angular 6+', 'ReactJS', 'Vue.js', 'Blazor/Razor Pages', 'Electron', 'Laravel MVC', 'Yii2', 'Unity', 'Bootstrap', 'Material Design', 'Sass']
+    },
+    {
+      title: 'Backend e integración',
+      items: ['.NET Core 3+', 'Entity Framework', 'Kestrel', 'Node.js', 'Express', 'Spring Boot', 'REST', 'SOAP', 'OAuth2', 'JWT', 'SignalR', 'Socket.io', 'MQTT', 'Node-RED', 'Swagger', 'Microservicios', 'Minimal APIs']
+    },
+    {
+      title: 'Bases de datos',
+      items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'Oracle SQL', 'Microsoft SQL Server', 'IndexedDB']
+    },
+    {
+      title: 'Lenguajes',
+      items: ['PHP 5-8', 'JavaScript', 'TypeScript', 'ECMAScript 6', 'C', 'C++', 'C#', 'Java', 'HTML5', 'CSS', 'Sass', 'Python', 'Bash']
+    },
+    {
+      title: 'Cloud y DevOps',
+      items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'CloudFront', 'API Gateway', 'Lambda', 'Docker', 'Kubernetes', 'Container Registry', 'AWS CLI', 'Azure CLI']
+    },
+    {
+      title: 'Servidores y servicios',
+      items: ['Debian', 'CentOS', 'Ubuntu Server', 'Apache2', 'SSL', 'HTTP/2', 'PHP-FPM', 'Samba', 'SSH', 'Nextcloud', 'GitLab', 'Gogs', 'Redis', 'Memcached', 'APCu', 'NFS', 'DLNA', 'RDP']
+    },
+    {
+      title: 'CMS, IA y ofimática',
+      items: ['WordPress', 'WooCommerce', 'Moodle', 'Wix', 'YOLO v5-v8', 'Excel avanzado', 'Microsoft Project medio', 'Prezi avanzado']
+    }
   ];
 
   protected readonly experiences: Experience[] = [
