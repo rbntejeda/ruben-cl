@@ -8,6 +8,15 @@
   font-family: inherit;
 }
 
+:host span,
+:host a,
+:host button,
+:host .mdc-button__label,
+:host .mdc-evolution-chip__text-label,
+:host .mdc-label {
+  font-family: inherit;
+}
+
 .site-header {
   align-items: center;
   backdrop-filter: blur(18px);
