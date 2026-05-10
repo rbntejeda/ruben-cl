@@ -41,7 +41,9 @@ export class AppComponent {
   protected readonly contact = {
     email: 'rubentejedaroa@gmail.com',
     phone: '+56 9 9122 3304',
-    location: 'Región del Biobío, Chile'
+    location: 'Región del Biobío, Chile',
+    linkedin: 'https://www.linkedin.com/in/rub%C3%A9n-eduardo-tejeda-roa-3771459a',
+    github: 'https://github.com/rbntejeda'
   };
 
   protected readonly skills = [

@@ -170,6 +170,10 @@
       <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
       <a mat-stroked-button class="button secondary" href="tel:+56991223304">{{ contact.phone }}</a>
     </div>
+    <div class="social-actions" aria-label="Redes sociales">
+      <a mat-stroked-button class="button secondary" [href]="contact.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a mat-stroked-button class="button secondary" [href]="contact.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
   </section>
 </main>
 
