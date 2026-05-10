@@ -12,6 +12,10 @@
     <a href="#hobbies">Hobbies</a>
     <a class="nav-cta" href="#contacto">Contacto</a>
   </nav>
+
+  <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-pressed]="isLightTheme">
+    {{ isLightTheme ? 'Modo noche' : 'Modo día' }}
+  </button>
 </header>
 
 <main id="inicio">

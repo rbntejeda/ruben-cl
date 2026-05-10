@@ -17,6 +17,11 @@
   z-index: 10;
 }
 
+:host(.light-theme) .site-header {
+  background: rgb(248 250 252 / 84%);
+  border-bottom-color: rgb(15 23 42 / 10%);
+}
+
 .brand,
 nav {
   align-items: center;
@@ -29,6 +34,20 @@ nav {
   font-weight: 800;
   letter-spacing: -0.03em;
   text-decoration: none;
+}
+
+:host(.light-theme) .brand,
+:host(.light-theme) nav a,
+:host(.light-theme) h1,
+:host(.light-theme) h2,
+:host(.light-theme) h3,
+:host(.light-theme) dd,
+:host(.light-theme) .hobby-list {
+  color: #0f172a;
+}
+
+:host(.light-theme) nav a:hover {
+  color: #2563eb;
 }
 
 .brand-mark,
@@ -65,8 +84,37 @@ nav a:hover {
   padding: 0.55rem 0.9rem;
 }
 
+.theme-toggle {
+  background: rgb(139 233 253 / 12%);
+  border: 1px solid rgb(139 233 253 / 32%);
+  border-radius: 999px;
+  color: #f8fafc;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.55rem 0.9rem;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+:host(.light-theme) .theme-toggle {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #f8fafc;
+}
+
 main {
   overflow: hidden;
+}
+
+:host(.light-theme) main {
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 96%), rgb(226 232 240 / 92%)),
+    radial-gradient(circle at top left, rgb(59 130 246 / 18%), transparent 32%);
 }
 
 .section,
@@ -197,6 +245,34 @@ h3 {
   box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
 }
 
+:host(.light-theme) .profile-card,
+:host(.light-theme) .content-card,
+:host(.light-theme) .timeline-card,
+:host(.light-theme) .study-card,
+:host(.light-theme) .contact-section {
+  background: linear-gradient(180deg, rgb(255 255 255 / 90%), rgb(248 250 252 / 72%));
+  border-color: rgb(15 23 42 / 10%);
+  box-shadow: 0 24px 80px rgb(15 23 42 / 12%);
+}
+
+:host(.light-theme) .lead,
+:host(.light-theme) .section-intro,
+:host(.light-theme) .content-card p,
+:host(.light-theme) .contact-section p,
+:host(.light-theme) .profile-card p,
+:host(.light-theme) .study-card p,
+:host(.light-theme) .timeline-card li,
+:host(.light-theme) .note,
+:host(.light-theme) dt,
+:host(.light-theme) footer {
+  color: #475569;
+}
+
+:host(.light-theme) .secondary {
+  border-color: rgb(15 23 42 / 16%);
+  color: #0f172a;
+}
+
 .profile-card {
   padding: clamp(1.5rem, 4vw, 2.25rem);
 }
@@ -314,6 +390,11 @@ dd {
   padding: 1.25rem;
 }
 
+:host(.light-theme) .tech-card {
+  background: rgb(255 255 255 / 78%);
+  border-color: rgb(15 23 42 / 10%);
+}
+
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
@@ -327,6 +408,13 @@ dd {
   color: #dbeafe;
   font-size: 0.88rem;
   padding: 0.45rem 0.65rem;
+}
+
+:host(.light-theme) .skill-cloud span,
+:host(.light-theme) .tech-tags span {
+  background: rgb(37 99 235 / 8%);
+  border-color: rgb(37 99 235 / 16%);
+  color: #1e3a8a;
 }
 
 .hobbies-section {
@@ -360,6 +448,10 @@ footer {
     flex-direction: column;
   }
 
+  .site-header {
+    position: static;
+  }
+
   nav {
     gap: 0.7rem;
   }
@@ -378,5 +470,34 @@ footer {
 
   .timeline-date {
     padding-top: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-header,
+  .section,
+  .hero,
+  .contact-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav a,
+  .theme-toggle,
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 18vw, 3.4rem);
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 12vw, 2.4rem);
   }
 }
