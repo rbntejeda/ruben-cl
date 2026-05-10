@@ -206,6 +206,11 @@ main {
   text-transform: uppercase;
 }
 
+:host(.light-theme) .eyebrow,
+:host(.light-theme) .timeline-date {
+  color: #2563eb;
+}
+
 h1,
 h2,
 h3,
