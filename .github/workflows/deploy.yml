@@ -60,4 +60,4 @@ jobs:
           rsync -az --delete \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT || 22 }}" \
             dist/ \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}"
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/ruben-cl/"
