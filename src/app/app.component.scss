@@ -270,6 +270,30 @@ mat-card-subtitle {
   transform: translateY(-2px);
 }
 
+.contact-link {
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.contact-icon {
+  align-items: center;
+  background: rgb(255 255 255 / 18%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 900;
+  height: 1.75rem;
+  justify-content: center;
+  line-height: 1;
+  min-width: 1.75rem;
+}
+
+.brand-icon {
+  font-size: 0.78rem;
+  letter-spacing: -0.04em;
+}
+
 .primary {
   background: #8be9fd;
   box-shadow: 0 16px 40px rgb(139 233 253 / 18%);
@@ -328,6 +352,12 @@ mat-card-subtitle {
 :host(.light-theme) .secondary {
   border-color: rgb(15 23 42 / 16%);
   color: #0f172a;
+}
+
+:host(.light-theme) .contact-icon {
+  background: rgb(37 99 235 / 9%);
+  border-color: rgb(37 99 235 / 16%);
+  color: #1e3a8a;
 }
 
 .profile-card {

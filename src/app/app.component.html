@@ -167,12 +167,24 @@
       Disponible para desarrollo fullstack, asesoría cloud, automatización DevOps y liderazgo técnico.
     </p>
     <div class="contact-actions">
-      <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-      <a mat-stroked-button class="button secondary" href="tel:+56991223304">{{ contact.phone }}</a>
+      <a mat-flat-button class="button primary contact-link" href="mailto:{{ contact.email }}" aria-label="Enviar correo">
+        <span class="contact-icon" aria-hidden="true">✉</span>
+        <span>{{ contact.email }}</span>
+      </a>
+      <a mat-stroked-button class="button secondary contact-link" href="tel:+56991223304" aria-label="Llamar por teléfono">
+        <span class="contact-icon" aria-hidden="true">☎</span>
+        <span>{{ contact.phone }}</span>
+      </a>
     </div>
     <div class="social-actions" aria-label="Redes sociales">
-      <a mat-stroked-button class="button secondary" [href]="contact.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a mat-stroked-button class="button secondary" [href]="contact.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a mat-stroked-button class="button secondary contact-link" [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" aria-label="Abrir LinkedIn">
+        <span class="contact-icon brand-icon" aria-hidden="true">in</span>
+        <span>LinkedIn</span>
+      </a>
+      <a mat-stroked-button class="button secondary contact-link" [href]="contact.github" target="_blank" rel="noopener noreferrer" aria-label="Abrir GitHub">
+        <span class="contact-icon brand-icon" aria-hidden="true">GH</span>
+        <span>GitHub</span>
+      </a>
     </div>
   </section>
 </main>
