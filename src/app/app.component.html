@@ -9,7 +9,6 @@
   <nav class="desktop-nav" aria-label="Navegación principal">
     <a mat-button href="#perfil">Perfil</a>
     <a mat-button href="#stack">Stack</a>
-    <a mat-button href="#feature-flags">Feature flags</a>
     <a mat-button href="#experiencia">Experiencia</a>
     <a mat-button href="#formacion">Formación</a>
     <a mat-button href="#hobbies">Hobbies</a>
@@ -28,7 +27,6 @@
 <nav class="mobile-nav" *ngIf="isMenuOpen" aria-label="Navegación móvil">
   <a mat-button href="#perfil" (click)="closeMenu()">Perfil</a>
   <a mat-button href="#stack" (click)="closeMenu()">Stack</a>
-  <a mat-button href="#feature-flags" (click)="closeMenu()">Feature flags</a>
   <a mat-button href="#experiencia" (click)="closeMenu()">Experiencia</a>
   <a mat-button href="#formacion" (click)="closeMenu()">Formación</a>
   <a mat-button href="#hobbies" (click)="closeMenu()">Hobbies</a>
@@ -45,8 +43,7 @@
       <h1>Construyo software confiable, automatizado y listo para crecer.</h1>
       <p class="lead">
         Soy Ruben Eduardo Tejeda Roa, desarrollador FullStack en Chile e ingeniero informático con 10 años
-        de experiencia en TI, Angular, AWS, Azure, Terraform, automatización DevOps, feature flags con
-        LaunchDarkly e integraciones cloud.
+        de experiencia en TI, Angular, AWS, Azure, Terraform, automatización DevOps e integraciones cloud.
       </p>
       <div class="hero-actions">
         <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">Hablemos</a>
@@ -111,32 +108,6 @@
         </mat-chip-set>
       </mat-card>
     </div>
-  </section>
-
-  <section id="feature-flags" class="section">
-    <div class="section-heading">
-      <p class="eyebrow">Feature flags</p>
-      <h2>Despliegues más seguros con LaunchDarkly.</h2>
-      <p class="section-intro">
-        Uso flags para activar funcionalidades de forma gradual, reducir riesgo en producción y mantener
-        fallbacks claros cuando algo no está listo.
-      </p>
-    </div>
-
-    <mat-card class="content-card split">
-      <div>
-        <p>
-          Uso feature flags con LaunchDarkly para controlar lanzamientos, separar lógica experimental y evitar
-          despliegues todo-o-nada.
-        </p>
-        <ul class="hobby-list">
-          <li *ngFor="let item of featureFlags">{{ item }}</li>
-        </ul>
-      </div>
-      <mat-chip-set class="skill-cloud" aria-label="Capacidades de feature flags">
-        <mat-chip *ngFor="let item of featureFlags">{{ item }}</mat-chip>
-      </mat-chip-set>
-    </mat-card>
   </section>
 
   <section id="experiencia" class="section">

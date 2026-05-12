@@ -6,8 +6,6 @@ Sitio personal de **Ruben Eduardo Tejeda Roa**, construido con Angular para publ
 
 - Angular standalone components
 - SCSS
-- SEO básico + JSON-LD
-- Sitemap regenerado en cada build
 - GitHub Actions para build y despliegue
 
 ## Desarrollo local
@@ -25,7 +23,7 @@ Luego abre `http://localhost:4200`.
 npm run build
 ```
 
-El sitemap se regenera antes del build y el resultado queda en `dist/ruben-cl/browser`.
+El resultado queda en `dist/ruben-cl/browser`.
 
 ## Despliegue
 
