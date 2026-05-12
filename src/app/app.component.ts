@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -32,11 +32,32 @@ type TechCategory = {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private systemThemeQuery?: MediaQueryList;
+  private readonly systemThemeListener = (event: MediaQueryListEvent) => {
+    this.isLightTheme = !event.matches;
+    this.updateThemeColor();
+  };
+
   @HostBinding('class.light-theme')
   protected isLightTheme = false;
 
   protected isMenuOpen = false;
+
+  ngOnInit(): void {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return;
+    }
+
+    this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.isLightTheme = !this.systemThemeQuery.matches;
+    this.updateThemeColor();
+    this.systemThemeQuery.addEventListener('change', this.systemThemeListener);
+  }
+
+  ngOnDestroy(): void {
+    this.systemThemeQuery?.removeEventListener('change', this.systemThemeListener);
+  }
 
   protected readonly contact = {
     email: 'rubentejedaroa@gmail.com',
@@ -111,6 +132,17 @@ export class AppComponent {
 
   protected toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
+    this.updateThemeColor();
+  }
+
+  private updateThemeColor(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', this.isLightTheme ? '#f8fafc' : '#101827');
   }
 
   protected toggleMenu(): void {
