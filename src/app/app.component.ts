@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
+import { Meta, Title } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -33,6 +34,8 @@ type TechCategory = {
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
+  constructor(private readonly title: Title, private readonly meta: Meta) {}
+
   private systemThemeQuery?: MediaQueryList;
   private readonly systemThemeListener = (event: MediaQueryListEvent) => {
     this.isLightTheme = !event.matches;
@@ -45,6 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
   protected isMenuOpen = false;
 
   ngOnInit(): void {
+    this.applySeo();
+
     if (typeof window === 'undefined' || !window.matchMedia) {
       return;
     }
@@ -77,6 +82,8 @@ export class AppComponent implements OnInit, OnDestroy {
     'GitHub Actions',
     'OpenClaw',
     'Ollama',
+    'LaunchDarkly',
+    'Feature Flags',
     'Slack Bot',
     'Cognito',
     'CI/CD',
@@ -118,7 +125,7 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     {
       title: 'Cloud y DevOps',
-      items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'GitHub Actions', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'Cognito', 'CloudFront', 'API Gateway', 'Lambda', 'Terraform', 'Docker', 'Kubernetes', 'Container Registry', 'AWS CLI', 'Azure CLI']
+      items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'GitHub Actions', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'Cognito', 'CloudFront', 'API Gateway', 'Lambda', 'Terraform', 'Docker', 'Kubernetes', 'Container Registry', 'LaunchDarkly', 'Feature flags', 'AWS CLI', 'Azure CLI']
     },
     {
       title: 'Servidores y servicios',
@@ -133,6 +140,26 @@ export class AppComponent implements OnInit, OnDestroy {
   protected toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
     this.updateThemeColor();
+  }
+
+  private applySeo(): void {
+    const title = 'Ruben E. Tejeda R. | FullStack, Cloud, DevOps y Feature Flags';
+    const description = 'Ruben Eduardo Tejeda Roa, desarrollador FullStack en Chile con experiencia en Angular, AWS, Azure, Terraform, GitHub Actions, LaunchDarkly, feature flags y DevOps.';
+    const url = 'https://ruben.cl/';
+
+    this.title.setTitle(title);
+    this.meta.updateTag({ name: 'description', content: description });
+    this.meta.updateTag({ name: 'keywords', content: 'Ruben Tejeda, Ruben Eduardo Tejeda Roa, desarrollador FullStack Chile, Angular, AWS, Azure, Terraform, GitHub Actions, LaunchDarkly, feature flags, DevOps, OAuth2, OpenID Connect, Cognito, cloud, backend, frontend' });
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:url', content: url });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'theme-color', content: this.isLightTheme ? '#f8fafc' : '#101827' });
+
+    if (typeof document !== 'undefined') {
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+    }
   }
 
   private updateThemeColor(): void {
@@ -274,6 +301,14 @@ export class AppComponent implements OnInit, OnDestroy {
       title: 'XII Jornadas Chilenas de Computación',
       institution: 'Valparaíso'
     }
+  ];
+
+  protected readonly featureFlags = [
+    'Despliegues graduales',
+    'Rollbacks rápidos',
+    'Experimentos controlados',
+    'Seguridad por defecto',
+    'Menos riesgo en producción'
   ];
 
   protected readonly hobbies = [

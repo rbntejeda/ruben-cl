@@ -5,7 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node scripts/generate-sitemap.mjs && ng build",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "prestart": "node scripts/generate-sitemap.mjs",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint"
   },

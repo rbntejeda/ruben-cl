@@ -1,0 +1,10 @@
+{
+  "baseUrl": "https://ruben.cl",
+  "routes": [
+    {
+      "loc": "/",
+      "changefreq": "monthly",
+      "priority": 1
+    }
+  ]
+}
