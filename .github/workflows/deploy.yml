@@ -48,16 +48,37 @@ jobs:
           name: ruben-cl-dist
           path: dist
 
+      - name: Validate deploy configuration
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          test -n "$DEPLOY_PATH" || { echo "Missing required secret: DEPLOY_PATH"; exit 1; }
+          test -n "$SSH_HOST" || { echo "Missing required secret: SSH_HOST"; exit 1; }
+          test -n "$SSH_KEY" || { echo "Missing required secret: SSH_KEY"; exit 1; }
+          test -n "$SSH_USER" || { echo "Missing required secret: SSH_USER"; exit 1; }
+
       - name: Setup SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT || 22 }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "${{ secrets.SSH_PORT || 22 }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
 
       - name: Deploy static files
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || 22 }}
+          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           rsync -az \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT || 22 }}" \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
             dist/ \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/ruben-cl/"
+            "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/"

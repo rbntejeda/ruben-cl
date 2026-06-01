@@ -81,6 +81,8 @@ export class AppComponent implements OnInit, OnDestroy {
     'Cognito',
     'CI/CD',
     'DevOps',
+    'Feature flags',
+    'LaunchDarkly',
     'Testing',
     'Unity',
     'Realidad virtual/aumentada',
@@ -119,6 +121,10 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       title: 'Cloud y DevOps',
       items: ['Azure', 'Azure DevOps', 'Azure Pipelines', 'GitHub Actions', 'Azure VM', 'Azure App Service', 'AWS', 'EC2', 'S3', 'Route 53', 'IAM', 'Cognito', 'CloudFront', 'API Gateway', 'Lambda', 'Terraform', 'Docker', 'Kubernetes', 'Container Registry', 'AWS CLI', 'Azure CLI']
+    },
+    {
+      title: 'Feature flags y experimentación',
+      items: ['LaunchDarkly', 'Feature flags', 'Progressive delivery', 'Kill switches', 'A/B testing']
     },
     {
       title: 'Servidores y servicios',
