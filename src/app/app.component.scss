@@ -539,6 +539,37 @@ dd {
   --mat-chip-selected-label-text-color: #dbeafe;
 }
 
+.feature-flags-card {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  margin-top: 1rem;
+}
+
+.practice-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.practice-item {
+  background: rgb(15 23 42 / 50%);
+  border: 1px solid rgb(139 233 253 / 12%);
+  border-radius: 1.2rem;
+  padding: 1rem;
+}
+
+.practice-item p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+:host(.light-theme) .practice-item {
+  background: rgb(37 99 235 / 6%);
+  border-color: rgb(37 99 235 / 12%);
+}
+
 :host(.light-theme) .skill-cloud span,
 :host(.light-theme) .tech-tags span,
 :host(.light-theme) .skill-cloud mat-chip,
@@ -628,8 +659,13 @@ footer {
   .section-grid,
   .split,
   .timeline-item,
+  .feature-flags-card,
   .cards-grid,
   .tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-grid {
     grid-template-columns: 1fr;
   }
 

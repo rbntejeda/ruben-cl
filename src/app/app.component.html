@@ -108,6 +108,23 @@
         </mat-chip-set>
       </mat-card>
     </div>
+
+    <mat-card class="content-card feature-flags-card">
+      <div>
+        <p class="eyebrow">Feature flags</p>
+        <mat-card-title>LaunchDarkly para entregar cambios con control operativo.</mat-card-title>
+        <p>
+          Uso feature flags para separar despliegue de liberación, habilitar cambios por segmento,
+          validar hipótesis de producto y apagar funcionalidades riesgosas sin depender de un redeploy.
+        </p>
+      </div>
+      <div class="practice-grid">
+        <article class="practice-item" *ngFor="let practice of featureFlagPractices">
+          <h3>{{ practice.title }}</h3>
+          <p>{{ practice.description }}</p>
+        </article>
+      </div>
+    </mat-card>
   </section>
 
   <section id="experiencia" class="section">

@@ -25,6 +25,11 @@ type TechCategory = {
   items: string[];
 };
 
+type FeatureFlagPractice = {
+  title: string;
+  description: string;
+};
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -133,6 +138,21 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       title: 'CMS, IA y ofimática',
       items: ['WordPress', 'WooCommerce', 'Moodle', 'Wix', 'OpenClaw', 'Ollama', 'YOLO v5-v8', 'Excel avanzado', 'Microsoft Project medio', 'Prezi avanzado']
+    }
+  ];
+
+  protected readonly featureFlagPractices: FeatureFlagPractice[] = [
+    {
+      title: 'Progressive delivery',
+      description: 'Liberación gradual por ambiente, segmento o porcentaje de usuarios para reducir riesgo en producción.'
+    },
+    {
+      title: 'Kill switches',
+      description: 'Desactivación rápida de funcionalidades sin redeploy cuando una integración o flujo crítico presenta problemas.'
+    },
+    {
+      title: 'Experimentación controlada',
+      description: 'Validación de cambios con métricas, audiencias específicas y aprendizaje antes de escalar una funcionalidad.'
     }
   ];
 
