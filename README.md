@@ -26,6 +26,15 @@ npm run build
 
 El resultado queda en `dist/ruben-cl/browser`.
 
+## Pruebas
+
+```bash
+npm test
+```
+
+Las pruebas unitarias usan Vitest con el builder oficial de Angular y se
+ejecutan automáticamente en cada pull request antes del build.
+
 ## Despliegue
 
 El workflow `.github/workflows/deploy.yml` compila el sitio y deja listo el artefacto.
