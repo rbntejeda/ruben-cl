@@ -1,4 +1,4 @@
-# Palworld Command Deck
+# palworld-dashboard
 
 Dashboard en Angular para vigilar un servidor de Palworld con una estética de operación ligera, pensado para recibir snapshots por websocket y pub/sub.
 

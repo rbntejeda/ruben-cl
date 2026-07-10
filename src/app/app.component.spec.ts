@@ -66,7 +66,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     const content = fixture.nativeElement.textContent as string;
-    expect(content).toContain('Palworld Command Deck');
+    expect(content).toContain('palworld-dashboard');
     expect(content).toContain('Dashboard técnico');
     expect(content).toContain('WebSocket');
     expect(content).toContain('Redis Pub/Sub');

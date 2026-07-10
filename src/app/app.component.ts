@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostBinding('class.light-theme')
   protected isLightTheme = false;
 
-  protected readonly title = 'Palworld Command Deck';
+  protected readonly title = 'palworld-dashboard';
   protected readonly subtitle =
     'Dashboard técnico para vigilar carga, memoria y disponibilidad con actualizaciones cada 5 segundos.';
   protected readonly wsEndpoint = 'ws://server:8080/ws';

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ruben-cl": {
+    "palworld-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ruben-cl:build:production"
+              "buildTarget": "palworld-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "ruben-cl:build:development"
+              "buildTarget": "palworld-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -67,7 +67,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "buildTarget": "ruben-cl:build:development",
+            "buildTarget": "palworld-dashboard:build:development",
             "tsConfig": "tsconfig.spec.json",
             "runner": "vitest",
             "setupFiles": ["src/test-setup.ts"]
