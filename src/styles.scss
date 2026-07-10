@@ -5,16 +5,16 @@
 :root {
   @include mat.theme((
     color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$violet-palette,
+      primary: mat.$green-palette,
+      tertiary: mat.$orange-palette,
       theme-type: dark,
     ),
-    typography: Roboto,
+    typography: Inter,
     density: 0,
   ));
 
   color-scheme: dark;
-  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -55,13 +55,15 @@ a,
 
 body {
   background:
-    linear-gradient(135deg, rgb(16 24 39 / 95%), rgb(2 6 23 / 100%)),
-    radial-gradient(circle at top left, rgb(167 139 250 / 20%), transparent 30%);
-  color: #f8fafc;
+    radial-gradient(circle at top right, rgb(46 204 113 / 15%), transparent 24%),
+    radial-gradient(circle at bottom left, rgb(255 182 72 / 10%), transparent 28%),
+    linear-gradient(180deg, #07111a 0%, #050b12 100%);
+  color: #ecf4f1;
   margin: 0;
+  min-height: 100vh;
 }
 
 ::selection {
-  background: #8be9fd;
-  color: #08111f;
+  background: #6ee7b7;
+  color: #06111a;
 }

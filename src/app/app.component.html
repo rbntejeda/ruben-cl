@@ -1,211 +1,139 @@
-<mat-toolbar class="site-header">
-  <a class="brand" href="#inicio" aria-label="Ir al inicio" (click)="closeMenu()">
-    <span class="brand-mark">RT</span>
-    <span>Ruben E. Tejeda R.</span>
-  </a>
-
-  <span class="toolbar-spacer"></span>
-
-  <nav class="desktop-nav" aria-label="Navegación principal">
-    <a mat-button href="#perfil">Perfil</a>
-    <a mat-button href="#stack">Stack</a>
-    <a mat-button href="#experiencia">Experiencia</a>
-    <a mat-button href="#formacion">Formación</a>
-    <a mat-button href="#hobbies">Hobbies</a>
-    <a mat-stroked-button class="nav-cta" href="#contacto">Contacto</a>
-  </nav>
-
-  <mat-slide-toggle class="theme-toggle desktop-theme" [checked]="isLightTheme" (change)="toggleTheme()">
-    {{ isLightTheme ? 'Día' : 'Noche' }}
-  </mat-slide-toggle>
-
-  <button mat-stroked-button class="mobile-menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen">
-    {{ isMenuOpen ? 'Cerrar' : 'Menú' }}
-  </button>
-</mat-toolbar>
-
-<nav class="mobile-nav" *ngIf="isMenuOpen" aria-label="Navegación móvil">
-  <a mat-button href="#perfil" (click)="closeMenu()">Perfil</a>
-  <a mat-button href="#stack" (click)="closeMenu()">Stack</a>
-  <a mat-button href="#experiencia" (click)="closeMenu()">Experiencia</a>
-  <a mat-button href="#formacion" (click)="closeMenu()">Formación</a>
-  <a mat-button href="#hobbies" (click)="closeMenu()">Hobbies</a>
-  <a mat-stroked-button href="#contacto" (click)="closeMenu()">Contacto</a>
-  <mat-slide-toggle [checked]="isLightTheme" (change)="toggleTheme()">
-    {{ isLightTheme ? 'Modo día' : 'Modo noche' }}
-  </mat-slide-toggle>
-</nav>
-
-<main id="inicio">
-  <section class="hero section-grid">
+<main class="shell">
+  <section class="hero">
     <div class="hero-copy">
-      <p class="eyebrow">Desarrollador FullStack · DevOps · Cloud</p>
-      <h1>Construyo software confiable, automatizado y listo para crecer.</h1>
-      <p class="lead">
-        Soy Ruben Eduardo Tejeda Roa, desarrollador FullStack en Chile e ingeniero informático con 10 años
-        de experiencia en TI, Angular, AWS, Azure, Terraform, automatización DevOps e integraciones cloud.
+      <p class="eyebrow">Palworld server monitor</p>
+      <h1>{{ title }}</h1>
+      <p class="subtitle">
+        {{ subtitle }}
       </p>
+
+      <div class="hero-pills" aria-label="Estado de la plataforma">
+        <span class="pill pill-live">{{ serviceBadge }}</span>
+        <span class="pill">{{ cadenceLabel }}</span>
+        <span class="pill">Docker ready</span>
+        <span class="pill">Nginx Proxy Manager</span>
+      </div>
+
       <div class="hero-actions">
-        <a mat-flat-button class="button primary" href="mailto:{{ contact.email }}">Hablemos</a>
-        <a mat-stroked-button class="button secondary" href="#experiencia">Ver trayectoria</a>
+        <a mat-flat-button class="primary-action" href="#arquitectura">Ver arquitectura</a>
+        <a mat-stroked-button class="secondary-action" href="#puesta-en-marcha">Puesta en marcha</a>
       </div>
     </div>
 
-    <mat-card class="profile-card" aria-label="Resumen profesional">
-      <div class="avatar" aria-hidden="true">RT</div>
-      <mat-card-title>Ruben Eduardo Tejeda Roa</mat-card-title>
-      <mat-card-subtitle>Ingeniero de Ejecución en Computación e Informática</mat-card-subtitle>
+    <mat-card class="status-card">
+      <div class="status-header">
+        <div>
+          <p class="eyebrow">Snapshot vivo</p>
+          <h2>{{ snapshot.timeLabel }}</h2>
+        </div>
+        <mat-slide-toggle [checked]="isLightTheme" (change)="toggleTheme()">
+          {{ isLightTheme ? 'Modo día' : 'Modo noche' }}
+        </mat-slide-toggle>
+      </div>
+
       <mat-divider></mat-divider>
-      <dl>
+
+      <div class="status-grid">
         <div>
-          <dt>Experiencia</dt>
-          <dd>10 años en TI</dd>
+          <span class="status-label">WebSocket</span>
+          <strong>{{ snapshot.wsState }}</strong>
+          <p>{{ wsEndpoint }}</p>
         </div>
         <div>
-          <dt>Ubicación</dt>
-          <dd>{{ contact.location }}</dd>
+          <span class="status-label">API</span>
+          <strong>{{ snapshot.serviceState | uppercase }}</strong>
+          <p>{{ apiEndpoint }}</p>
         </div>
         <div>
-          <dt>Idioma</dt>
-          <dd>Inglés técnico avanzado</dd>
+          <span class="status-label">Uptime</span>
+          <strong>{{ snapshot.uptimeLabel }}</strong>
+          <p>{{ snapshot.note }}</p>
         </div>
-      </dl>
-    </mat-card>
-  </section>
-
-  <section id="perfil" class="section">
-    <div class="section-heading">
-      <p class="eyebrow">Perfil</p>
-      <h2>Un perfil técnico con mirada de producto y operación.</h2>
-    </div>
-    <mat-card class="content-card split">
-      <p>
-        He trabajado en proyectos web, backend, cloud, realidad virtual/aumentada y procesos de alta
-        concurrencia. Me muevo bien entre estrategia técnica, ejecución, integración, despliegue y mejora
-        continua, buscando que los equipos entreguen con mayor seguridad y menos fricción.
-      </p>
-      <mat-chip-set class="skill-cloud" aria-label="Competencias">
-        <mat-chip *ngFor="let skill of skills">{{ skill }}</mat-chip>
-      </mat-chip-set>
-    </mat-card>
-  </section>
-
-  <section id="stack" class="section">
-    <div class="section-heading">
-      <p class="eyebrow">Stack y competencias</p>
-      <h2>Herramientas para construir, integrar y operar soluciones completas.</h2>
-      <p class="section-intro">
-        Experiencia práctica en frontend, backend, cloud, DevOps, bases de datos, servidores,
-        metodologías de trabajo e integración de sistemas.
-      </p>
-    </div>
-
-    <div class="tech-grid">
-      <mat-card class="tech-card" *ngFor="let category of techCategories">
-        <mat-card-title>{{ category.title }}</mat-card-title>
-        <mat-chip-set class="tech-tags" aria-label="Tecnologías de {{ category.title }}">
-          <mat-chip *ngFor="let item of category.items">{{ item }}</mat-chip>
-        </mat-chip-set>
-      </mat-card>
-    </div>
-
-    <mat-card class="content-card feature-flags-card">
-      <div>
-        <p class="eyebrow">Feature flags</p>
-        <mat-card-title>LaunchDarkly para entregar cambios con control operativo.</mat-card-title>
-        <p>
-          Uso feature flags para separar despliegue de liberación, habilitar cambios por segmento,
-          validar hipótesis de producto y apagar funcionalidades riesgosas sin depender de un redeploy.
-        </p>
       </div>
-      <div class="practice-grid">
-        <article class="practice-item" *ngFor="let practice of featureFlagPractices">
-          <h3>{{ practice.title }}</h3>
-          <p>{{ practice.description }}</p>
-        </article>
+
+      <div class="progress-stack">
+        <div class="progress-row">
+          <div>
+            <span>CPU load</span>
+            <strong>{{ snapshot.cpuLoad | number:'1.0-0' }}%</strong>
+          </div>
+          <div class="bar">
+            <span class="fill cpu" [style.width]="loadBarWidth"></span>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div>
+            <span>Memory usage</span>
+            <strong>{{ snapshot.memoryUsed | number:'1.0-1' }} / {{ snapshot.memoryTotal | number:'1.0-1' }} GB</strong>
+          </div>
+          <div class="bar">
+            <span class="fill memory" [style.width]="memoryBarWidth"></span>
+          </div>
+        </div>
       </div>
     </mat-card>
   </section>
 
-  <section id="experiencia" class="section">
+  <section class="metrics">
+    <mat-card class="metric-card" *ngFor="let metric of metricCards" [ngClass]="metric.tone">
+      <span class="metric-title">{{ metric.title }}</span>
+      <strong class="metric-value">{{ metric.value }}</strong>
+      <p>{{ metric.detail }}</p>
+    </mat-card>
+  </section>
+
+  <section class="content-grid">
+    <mat-card class="panel">
+      <p class="eyebrow">Live feed</p>
+      <h3>Últimos snapshots</h3>
+      <div class="history-list">
+        <div class="history-item" *ngFor="let item of historySeries">
+          <span class="history-time">{{ item.label }}</span>
+          <div class="history-bars">
+            <div class="mini-bar">
+              <span>CPU</span>
+              <div class="bar small">
+                <span class="fill cpu" [style.width]="item.load + '%'"></span>
+              </div>
+            </div>
+            <div class="mini-bar">
+              <span>RAM</span>
+              <div class="bar small">
+                <span class="fill memory" [style.width]="item.memory + '%'"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="panel">
+      <p class="eyebrow">Puesta en marcha</p>
+      <h3>Stack pensado para producción ligera</h3>
+      <ul class="notes">
+        <li *ngFor="let note of deploymentNotes">{{ note }}</li>
+      </ul>
+      <div class="connection-block">
+        <span class="connection-label">Cadencia</span>
+        <strong>5 segundos por snapshot</strong>
+        <p>El front puede escuchar websocket y el backend puede publicar por Pub/Sub.</p>
+      </div>
+    </mat-card>
+  </section>
+
+  <section id="arquitectura" class="architecture">
     <div class="section-heading">
-      <p class="eyebrow">Experiencia</p>
-      <h2>Trayectoria profesional</h2>
+      <p class="eyebrow">Arquitectura</p>
+      <h2>Cadena simple, desacoplada y lista para crecer.</h2>
     </div>
 
-    <div class="timeline">
-      <article class="timeline-item" *ngFor="let item of experiences">
-        <div class="timeline-date">{{ item.period }}</div>
-        <mat-card class="timeline-card">
-          <mat-card-title>{{ item.role }}</mat-card-title>
-          <mat-card-subtitle class="company">{{ item.company }}</mat-card-subtitle>
-          <ul>
-            <li *ngFor="let highlight of item.highlights">{{ highlight }}</li>
-          </ul>
-        </mat-card>
+    <div class="steps">
+      <article class="step" *ngFor="let step of architecture">
+        <span class="step-badge">{{ step.badge }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.detail }}</p>
       </article>
     </div>
   </section>
-
-  <section id="formacion" class="section">
-    <div class="section-heading">
-      <p class="eyebrow">Formación</p>
-      <h2>Estudios y perfeccionamiento</h2>
-    </div>
-
-    <div class="cards-grid">
-      <mat-card class="study-card" *ngFor="let study of studies">
-        <span>{{ study.year }}</span>
-        <mat-card-title>{{ study.title }}</mat-card-title>
-        <p>{{ study.institution }}</p>
-      </mat-card>
-    </div>
-  </section>
-
-  <section id="hobbies" class="section section-grid hobbies-section">
-    <div class="section-heading">
-      <p class="eyebrow">Hobbies e intereses</p>
-      <h2>Lo que también mueve mi curiosidad.</h2>
-    </div>
-    <mat-card class="content-card">
-      <ul class="hobby-list">
-        <li *ngFor="let hobby of hobbies">{{ hobby }}</li>
-      </ul>
-      <p class="note">
-        Esta sección está pensada para crecer con proyectos personales, experimentos, artículos o demos.
-      </p>
-    </mat-card>
-  </section>
-
-  <section id="contacto" class="contact-section">
-    <p class="eyebrow">Contacto</p>
-    <h2>¿Construimos algo sólido?</h2>
-    <p>
-      Disponible para desarrollo fullstack, asesoría cloud, automatización DevOps y liderazgo técnico.
-    </p>
-    <div class="contact-actions">
-      <a mat-flat-button class="button primary contact-link" href="mailto:{{ contact.email }}" aria-label="Enviar correo">
-        <span class="contact-icon" aria-hidden="true">✉</span>
-        <span>{{ contact.email }}</span>
-      </a>
-      <a mat-stroked-button class="button secondary contact-link" href="tel:+56991223304" aria-label="Llamar por teléfono">
-        <span class="contact-icon" aria-hidden="true">☎</span>
-        <span>{{ contact.phone }}</span>
-      </a>
-    </div>
-    <div class="social-actions" aria-label="Redes sociales">
-      <a mat-stroked-button class="button secondary contact-link" [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" aria-label="Abrir LinkedIn">
-        <span class="contact-icon brand-icon" aria-hidden="true">in</span>
-        <span>LinkedIn</span>
-      </a>
-      <a mat-stroked-button class="button secondary contact-link" [href]="contact.github" target="_blank" rel="noopener noreferrer" aria-label="Abrir GitHub">
-        <span class="contact-icon brand-icon" aria-hidden="true">GH</span>
-        <span>GitHub</span>
-      </a>
-    </div>
-  </section>
 </main>
-
-<footer>
-  <p>© 2026 Ruben E. Tejeda R. Hecho con Angular y pensado para ruben.cl.</p>
-</footer>

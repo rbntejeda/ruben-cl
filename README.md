@@ -1,13 +1,20 @@
-# ruben.cl
+# Palworld Command Deck
 
-Sitio personal de **Ruben Eduardo Tejeda Roa**, construido con Angular para publicar en `ruben.cl`.
+Dashboard en Angular para vigilar un servidor de Palworld con una estética de operación ligera, pensado para recibir snapshots por websocket y pub/sub.
+
+## Qué hace
+
+- Muestra CPU, memoria, jugadores, latencia y disponibilidad.
+- Actualiza el estado cada 5 segundos.
+- Incluye la arquitectura recomendada para `collector -> pub/sub -> websocket -> UI`.
+- Está preparado para publicarse detrás de Nginx Proxy Manager.
 
 ## Stack
 
-- Angular standalone components
+- Angular 20
 - SCSS
-- GitHub Actions para build y despliegue
-- Feature flags con LaunchDarkly
+- Angular Material
+- Vitest
 
 ## Desarrollo local
 
@@ -18,35 +25,29 @@ npm start
 
 Luego abre `http://localhost:4200`.
 
-## Build
-
-```bash
-npm run build
-```
-
-El resultado queda en `dist/ruben-cl/browser`.
-
 ## Pruebas
 
 ```bash
 npm test
 ```
 
-Las pruebas unitarias usan Vitest con el builder oficial de Angular y se
-ejecutan automáticamente en cada pull request antes del build.
+## Build
+
+```bash
+npm run build
+```
 
 ## Despliegue
 
-El workflow `.github/workflows/deploy.yml` compila el sitio y deja listo el artefacto.
+El repositorio mantiene el flujo de GitHub Actions para build y despliegue estático. Si lo vas a poner detrás de un proxy:
 
-Para desplegar a tu servidor por SSH, configura estos secrets en GitHub:
+- expón el frontend por HTTP/HTTPS
+- deja pasar websocket en la ruta del backend
+- mantén Redis y el collector en red privada
 
-- `SSH_HOST`
-- `SSH_USER`
-- `SSH_KEY`
-- `SSH_PORT` opcional, usa `22` si no existe
-- `DEPLOY_PATH`, por ejemplo `/var/www/ruben.cl`
+## Ruta recomendada para evolucionarlo
 
-El despliegue falla explícitamente si falta cualquiera de los secrets requeridos.
-
-> Nota de seguridad: no se incluyen RUT, fecha de nacimiento ni domicilio en el sitio porque el repositorio será público.
+1. Agregar un backend pequeño con `ws` y `redis`.
+2. Publicar snapshots por Redis Pub/Sub.
+3. Leer el estado del juego, del host y del contenedor cada 5 segundos.
+4. Servir la UI detrás de Nginx Proxy Manager.

@@ -13,16 +13,12 @@ function createMediaQueryList(matches: boolean) {
     matches,
     media: '(prefers-color-scheme: dark)',
     onchange: null,
-    addEventListener: vi.fn(
-      (_type: string, listener: (event: MediaQueryListEvent) => void) => {
-        listeners.add(listener);
-      }
-    ),
-    removeEventListener: vi.fn(
-      (_type: string, listener: (event: MediaQueryListEvent) => void) => {
-        listeners.delete(listener);
-      }
-    ),
+    addEventListener: vi.fn((_type: string, listener: (event: MediaQueryListEvent) => void) => {
+      listeners.add(listener);
+    }),
+    removeEventListener: vi.fn((_type: string, listener: (event: MediaQueryListEvent) => void) => {
+      listeners.delete(listener);
+    }),
     addListener: vi.fn(),
     removeListener: vi.fn(),
     dispatchEvent: vi.fn()
@@ -35,6 +31,7 @@ function createMediaQueryList(matches: boolean) {
         configurable: true,
         value: matchesDarkTheme
       });
+
       const event = { matches: matchesDarkTheme } as MediaQueryListEvent;
       listeners.forEach((listener) => listener(event));
     }
@@ -58,9 +55,10 @@ describe('AppComponent', () => {
   afterEach(() => {
     themeColorMeta.remove();
     vi.restoreAllMocks();
+    vi.useRealTimers();
   });
 
-  it('renders the main professional profile content', () => {
+  it('renders the Palworld dashboard with its connection details', () => {
     const { mediaQuery } = createMediaQueryList(true);
     vi.spyOn(window, 'matchMedia').mockReturnValue(mediaQuery);
 
@@ -68,34 +66,28 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     const content = fixture.nativeElement.textContent as string;
-    expect(content).toContain('Ruben Eduardo Tejeda Roa');
-    expect(content).toContain('Construyo software confiable');
-    expect(content).toContain('Stack y competencias');
+    expect(content).toContain('Palworld Command Deck');
+    expect(content).toContain('Dashboard técnico');
+    expect(content).toContain('WebSocket');
+    expect(content).toContain('Redis Pub/Sub');
   });
 
-  it('opens and closes the mobile navigation', () => {
+  it('refreshes the snapshot every five seconds', () => {
     const { mediaQuery } = createMediaQueryList(true);
     vi.spyOn(window, 'matchMedia').mockReturnValue(mediaQuery);
+    vi.useFakeTimers();
 
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
 
-    const menuButton = fixture.nativeElement.querySelector(
-      '.mobile-menu-button'
-    ) as HTMLButtonElement;
-    menuButton.click();
+    const initialCpu = fixture.nativeElement.querySelector('.metric-card .metric-value')?.textContent;
+
+    vi.advanceTimersByTime(5000);
     fixture.detectChanges();
 
-    expect(menuButton.getAttribute('aria-expanded')).toBe('true');
-    const mobileLink = fixture.nativeElement.querySelector(
-      '.mobile-nav a'
-    ) as HTMLAnchorElement;
-    expect(mobileLink).not.toBeNull();
-
-    mobileLink.click();
-    fixture.detectChanges();
-
-    expect(fixture.nativeElement.querySelector('.mobile-nav')).toBeNull();
+    const updatedCpu = fixture.nativeElement.querySelector('.metric-card .metric-value')?.textContent;
+    expect(updatedCpu).not.toBe(initialCpu);
+    vi.useRealTimers();
   });
 
   it('tracks system theme changes and updates the browser theme color', () => {
@@ -106,13 +98,13 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.classList.contains('light-theme')).toBe(false);
-    expect(themeColorMeta.content).toBe('#101827');
+    expect(themeColorMeta.content).toBe('#07111a');
 
     emit(false);
     fixture.detectChanges();
 
     expect(fixture.nativeElement.classList.contains('light-theme')).toBe(true);
-    expect(themeColorMeta.content).toBe('#f8fafc');
+    expect(themeColorMeta.content).toBe('#f3f6ef');
   });
 
   it('toggles the selected theme and removes its media query listener', () => {
@@ -126,13 +118,10 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.classList.contains('light-theme')).toBe(true);
-    expect(themeColorMeta.content).toBe('#f8fafc');
+    expect(themeColorMeta.content).toBe('#f3f6ef');
 
     fixture.destroy();
 
-    expect(mediaQuery.removeEventListener).toHaveBeenCalledWith(
-      'change',
-      expect.any(Function)
-    );
+    expect(mediaQuery.removeEventListener).toHaveBeenCalledWith('change', expect.any(Function));
   });
 });
