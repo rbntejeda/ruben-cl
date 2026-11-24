@@ -4,10 +4,10 @@ Sitio personal de **Ruben Eduardo Tejeda Roa**, construido con Angular para publ
 
 ## Stack
 
-- Angular standalone components
-- SCSS
+- Angular standalone components, zoneless y con signals
+- Angular Material y SCSS
+- Prerender estático (SSG) con `@angular/ssr`: el HTML publicado ya incluye todo el contenido
 - GitHub Actions para build y despliegue
-- Feature flags con LaunchDarkly
 
 ## Desarrollo local
 
@@ -24,7 +24,9 @@ Luego abre `http://localhost:4200`.
 npm run build
 ```
 
-El resultado queda en `dist/ruben-cl/browser`.
+El resultado queda en `dist/ruben-cl/browser` como sitio estático prerenderizado
+(`index.html` con el contenido completo). Después del build, `scripts/update-sitemap-lastmod.mjs`
+actualiza la fecha `<lastmod>` de `sitemap.xml` con la fecha del build.
 
 ## Pruebas
 

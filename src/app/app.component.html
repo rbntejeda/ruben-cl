@@ -15,26 +15,28 @@
     <a mat-stroked-button class="nav-cta" href="#contacto">Contacto</a>
   </nav>
 
-  <mat-slide-toggle class="theme-toggle desktop-theme" [checked]="isLightTheme" (change)="toggleTheme()">
-    {{ isLightTheme ? 'Día' : 'Noche' }}
+  <mat-slide-toggle class="theme-toggle desktop-theme" [checked]="isLightTheme()" (change)="toggleTheme()">
+    {{ isLightTheme() ? 'Día' : 'Noche' }}
   </mat-slide-toggle>
 
-  <button mat-stroked-button class="mobile-menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen">
-    {{ isMenuOpen ? 'Cerrar' : 'Menú' }}
+  <button mat-stroked-button class="mobile-menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()">
+    {{ isMenuOpen() ? 'Cerrar' : 'Menú' }}
   </button>
 </mat-toolbar>
 
-<nav class="mobile-nav" *ngIf="isMenuOpen" aria-label="Navegación móvil">
-  <a mat-button href="#perfil" (click)="closeMenu()">Perfil</a>
-  <a mat-button href="#stack" (click)="closeMenu()">Stack</a>
-  <a mat-button href="#experiencia" (click)="closeMenu()">Experiencia</a>
-  <a mat-button href="#formacion" (click)="closeMenu()">Formación</a>
-  <a mat-button href="#hobbies" (click)="closeMenu()">Hobbies</a>
-  <a mat-stroked-button href="#contacto" (click)="closeMenu()">Contacto</a>
-  <mat-slide-toggle [checked]="isLightTheme" (change)="toggleTheme()">
-    {{ isLightTheme ? 'Modo día' : 'Modo noche' }}
-  </mat-slide-toggle>
-</nav>
+@if (isMenuOpen()) {
+  <nav class="mobile-nav" aria-label="Navegación móvil">
+    <a mat-button href="#perfil" (click)="closeMenu()">Perfil</a>
+    <a mat-button href="#stack" (click)="closeMenu()">Stack</a>
+    <a mat-button href="#experiencia" (click)="closeMenu()">Experiencia</a>
+    <a mat-button href="#formacion" (click)="closeMenu()">Formación</a>
+    <a mat-button href="#hobbies" (click)="closeMenu()">Hobbies</a>
+    <a mat-stroked-button href="#contacto" (click)="closeMenu()">Contacto</a>
+    <mat-slide-toggle [checked]="isLightTheme()" (change)="toggleTheme()">
+      {{ isLightTheme() ? 'Modo día' : 'Modo noche' }}
+    </mat-slide-toggle>
+  </nav>
+}
 
 <main id="inicio">
   <section class="hero section-grid">
@@ -85,7 +87,9 @@
         continua, buscando que los equipos entreguen con mayor seguridad y menos fricción.
       </p>
       <mat-chip-set class="skill-cloud" aria-label="Competencias">
-        <mat-chip *ngFor="let skill of skills">{{ skill }}</mat-chip>
+        @for (skill of skills; track skill) {
+          <mat-chip>{{ skill }}</mat-chip>
+        }
       </mat-chip-set>
     </mat-card>
   </section>
@@ -101,12 +105,16 @@
     </div>
 
     <div class="tech-grid">
-      <mat-card class="tech-card" *ngFor="let category of techCategories">
-        <mat-card-title>{{ category.title }}</mat-card-title>
-        <mat-chip-set class="tech-tags" aria-label="Tecnologías de {{ category.title }}">
-          <mat-chip *ngFor="let item of category.items">{{ item }}</mat-chip>
-        </mat-chip-set>
-      </mat-card>
+      @for (category of techCategories; track category.title) {
+        <mat-card class="tech-card">
+          <mat-card-title>{{ category.title }}</mat-card-title>
+          <mat-chip-set class="tech-tags" aria-label="Tecnologías de {{ category.title }}">
+            @for (item of category.items; track item) {
+              <mat-chip>{{ item }}</mat-chip>
+            }
+          </mat-chip-set>
+        </mat-card>
+      }
     </div>
 
     <mat-card class="content-card feature-flags-card">
@@ -119,10 +127,12 @@
         </p>
       </div>
       <div class="practice-grid">
-        <article class="practice-item" *ngFor="let practice of featureFlagPractices">
-          <h3>{{ practice.title }}</h3>
-          <p>{{ practice.description }}</p>
-        </article>
+        @for (practice of featureFlagPractices; track practice.title) {
+          <article class="practice-item">
+            <h3>{{ practice.title }}</h3>
+            <p>{{ practice.description }}</p>
+          </article>
+        }
       </div>
     </mat-card>
   </section>
@@ -134,16 +144,20 @@
     </div>
 
     <div class="timeline">
-      <article class="timeline-item" *ngFor="let item of experiences">
-        <div class="timeline-date">{{ item.period }}</div>
-        <mat-card class="timeline-card">
-          <mat-card-title>{{ item.role }}</mat-card-title>
-          <mat-card-subtitle class="company">{{ item.company }}</mat-card-subtitle>
-          <ul>
-            <li *ngFor="let highlight of item.highlights">{{ highlight }}</li>
-          </ul>
-        </mat-card>
-      </article>
+      @for (item of experiences; track $index) {
+        <article class="timeline-item">
+          <div class="timeline-date">{{ item.period }}</div>
+          <mat-card class="timeline-card">
+            <mat-card-title>{{ item.role }}</mat-card-title>
+            <mat-card-subtitle class="company">{{ item.company }}</mat-card-subtitle>
+            <ul>
+              @for (highlight of item.highlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
+          </mat-card>
+        </article>
+      }
     </div>
   </section>
 
@@ -154,11 +168,13 @@
     </div>
 
     <div class="cards-grid">
-      <mat-card class="study-card" *ngFor="let study of studies">
-        <span>{{ study.year }}</span>
-        <mat-card-title>{{ study.title }}</mat-card-title>
-        <p>{{ study.institution }}</p>
-      </mat-card>
+      @for (study of studies; track study.title) {
+        <mat-card class="study-card">
+          <span>{{ study.year }}</span>
+          <mat-card-title>{{ study.title }}</mat-card-title>
+          <p>{{ study.institution }}</p>
+        </mat-card>
+      }
     </div>
   </section>
 
@@ -169,7 +185,9 @@
     </div>
     <mat-card class="content-card">
       <ul class="hobby-list">
-        <li *ngFor="let hobby of hobbies">{{ hobby }}</li>
+        @for (hobby of hobbies; track hobby) {
+          <li>{{ hobby }}</li>
+        }
       </ul>
       <p class="note">
         Esta sección está pensada para crecer con proyectos personales, experimentos, artículos o demos.
@@ -188,7 +206,7 @@
         <span class="contact-icon" aria-hidden="true">✉</span>
         <span>{{ contact.email }}</span>
       </a>
-      <a mat-stroked-button class="button secondary contact-link" href="tel:+56991223304" aria-label="Llamar por teléfono">
+      <a mat-stroked-button class="button secondary contact-link" [href]="contact.phoneHref" aria-label="Llamar por teléfono">
         <span class="contact-icon" aria-hidden="true">☎</span>
         <span>{{ contact.phone }}</span>
       </a>
@@ -207,5 +225,5 @@
 </main>
 
 <footer>
-  <p>© 2026 Ruben E. Tejeda R. Hecho con Angular y pensado para ruben.cl.</p>
+  <p>© {{ currentYear }} Ruben E. Tejeda R. Hecho con Angular y pensado para ruben.cl.</p>
 </footer>

@@ -1,5 +1,5 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 type TestableAppComponent = AppComponent & {
@@ -51,7 +51,7 @@ describe('AppComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideNoopAnimations()]
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
   });
 
