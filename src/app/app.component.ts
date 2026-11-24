@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   protected readonly contact = {
-    email: 'rubentejedaroa@gmail.com',
+    email: 'contacto@ruben.cl',
     phone: '+56 9 9122 3304',
     location: 'Región del Biobío, Chile',
     linkedin: 'https://www.linkedin.com/in/rub%C3%A9n-eduardo-tejeda-roa-3771459a',
