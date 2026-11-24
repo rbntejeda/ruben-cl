@@ -34,12 +34,18 @@ actualiza la fecha `<lastmod>` de `sitemap.xml` con la fecha del build.
 npm test
 ```
 
-Las pruebas unitarias usan Vitest con el builder oficial de Angular y se
-ejecutan automáticamente en cada pull request antes del build.
+Las pruebas unitarias usan Vitest con el builder oficial de Angular.
+
+## CI/CD
+
+- **Pull requests a `main`** (`.github/workflows/test.yml`): ejecuta solo los
+  tests. El check `test` es obligatorio para poder hacer merge.
+- **Push a `main`** (`.github/workflows/deploy.yml`): compila y despliega, sin
+  volver a ejecutar los tests (ya pasaron en el pull request).
 
 ## Despliegue
 
-El workflow `.github/workflows/deploy.yml` compila el sitio y deja listo el artefacto.
+El workflow `.github/workflows/deploy.yml` compila el sitio y lo despliega al hacer push a `main`.
 
 Para desplegar a tu servidor por SSH, configura estos secrets en GitHub:
 
