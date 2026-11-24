@@ -1,5 +1,4 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -33,21 +32,23 @@ type FeatureFlagPractice = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgFor, NgIf, MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatSlideToggleModule, MatToolbarModule],
+  imports: [MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatSlideToggleModule, MatToolbarModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  host: {
+    '[class.light-theme]': 'isLightTheme()'
+  }
 })
 export class AppComponent implements OnInit, OnDestroy {
   private systemThemeQuery?: MediaQueryList;
   private readonly systemThemeListener = (event: MediaQueryListEvent) => {
-    this.isLightTheme = !event.matches;
+    this.isLightTheme.set(!event.matches);
     this.updateThemeColor();
   };
 
-  @HostBinding('class.light-theme')
-  protected isLightTheme = false;
-
-  protected isMenuOpen = false;
+  protected readonly isLightTheme = signal(false);
+  protected readonly isMenuOpen = signal(false);
+  protected readonly currentYear = new Date().getFullYear();
 
   ngOnInit(): void {
     if (typeof window === 'undefined' || !window.matchMedia) {
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    this.isLightTheme = !this.systemThemeQuery.matches;
+    this.isLightTheme.set(!this.systemThemeQuery.matches);
     this.updateThemeColor();
     this.systemThemeQuery.addEventListener('change', this.systemThemeListener);
   }
@@ -67,6 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
   protected readonly contact = {
     email: 'contacto@ruben.cl',
     phone: '+56 9 9122 3304',
+    phoneHref: 'tel:+56991223304',
     location: 'Región del Biobío, Chile',
     linkedin: 'https://www.linkedin.com/in/rub%C3%A9n-eduardo-tejeda-roa-3771459a',
     github: 'https://github.com/rbntejeda'
@@ -157,7 +159,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   protected toggleTheme(): void {
-    this.isLightTheme = !this.isLightTheme;
+    this.isLightTheme.update((isLight) => !isLight);
     this.updateThemeColor();
   }
 
@@ -168,15 +170,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', this.isLightTheme ? '#f8fafc' : '#101827');
+      ?.setAttribute('content', this.isLightTheme() ? '#f8fafc' : '#101827');
   }
 
   protected toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.update((isOpen) => !isOpen);
   }
 
   protected closeMenu(): void {
-    this.isMenuOpen = false;
+    this.isMenuOpen.set(false);
   }
 
   protected readonly experiences: Experience[] = [
