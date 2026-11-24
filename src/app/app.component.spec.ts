@@ -69,7 +69,8 @@ describe('AppComponent', () => {
 
     const content = fixture.nativeElement.textContent as string;
     expect(content).toContain('Ruben Eduardo Tejeda Roa');
-    expect(content).toContain('Construyo software confiable');
+    expect(content).toContain('Diseño y construyo plataformas web y cloud');
+    expect(content).toContain('Arquitectura de autenticación con Amazon Cognito');
     expect(content).toContain('Stack y competencias');
   });
 
